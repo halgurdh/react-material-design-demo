@@ -5,3 +5,8 @@ A React Demo with the Material Design components
 - clone repo
 - npm install
 - npm start
+
+# How to contribute
+- fork repo
+- merge your changes with latest master
+- create pull request
