@@ -78,7 +78,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const MainPage = () => {
+const MainPage = (props) => {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -213,7 +213,7 @@ const MainPage = () => {
                 {renderProfile}
             </div>
             <div>
-                <StayStrong/>
+                <StayStrong />
             </div>
         </div>
     );

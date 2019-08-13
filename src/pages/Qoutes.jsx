@@ -10,34 +10,14 @@ import Typography from '@material-ui/core/Typography';
 import { couldStartTrivia } from 'typescript';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
-import UndoIcon from '@material-ui/icons/Undo';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 
-class StayStrong extends React.Component {
+class Qoutes extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            days: 0,
-            time: null,
-            intervalId: null,
-            goalName: "Stay Strong!"
+            qoute: null,
         };
-
-        this.countDownDate = null;
-        this.updateInterval = null;
-        
-        this.startTime = this.startTime.bind(this);
-        this.resetTime = this.resetTime.bind(this);
-        this.stopTime = this.stopTime.bind(this);
-
-        if (localStorage.getItem('goalName') != "null") {
-        }
-
-        if (localStorage.getItem('startDate') != "null") {
-            this.startTime();
-        }
 
         this.classes = makeStyles(theme => ({
             card: {
@@ -65,17 +45,6 @@ class StayStrong extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
 
-    }
-
-    dayIsPassed(date1, date2) {
-        const diffTime = Math.abs(localStorage.getItem('goalName').getTime() - date1.getTime());
-        if(diffTime != null) {
-            const diffDays = Math.ceil(diffTime / (/*1000 * 60 * */ 60 * 24)); 
-            return diffDays > 1;
-        }
-        else {
-            return false;
-        }
     }
 
     startInterval() {
