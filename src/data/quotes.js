@@ -1,4 +1,4 @@
-this.qoutes = [
+this.quotes = [
 "“I avoid looking forward or backward, and try to keep looking upward.” – Charlotte Brontë"
 ,"“The best time to plant a tree was 20 years ago. The second best time is now.” – Chinese proverb"
 ,"“Sometimes you can only find Heaven by slowly backing away from Hell.” – Carrie Fisher"
@@ -69,4 +69,4 @@ this.qoutes = [
 ,"“When you get into a tight place and everything goes against you, till it seems you could not hang on a minute longer, never give up then, for that is just the place and time that the tide will turn.” – Harriet Beecher Stowe"
 ,"“You must do the things you think you cannot do.” – Eleanor Roosevelt"
 ,"“The only person you are destined to become is the person you decide to be.” – Ralph Waldo Emerson"
-]
+];

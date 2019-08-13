@@ -15,6 +15,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import StayStrong from './StayStrong';
+import Quotes from './Quotes';
 
 const useStyles = makeStyles(theme => ({
     grow: {
@@ -214,6 +215,7 @@ const MainPage = (props) => {
             </div>
             <div>
                 <StayStrong />
+                <Quotes />
             </div>
         </div>
     );
