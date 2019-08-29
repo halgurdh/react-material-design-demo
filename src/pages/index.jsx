@@ -15,6 +15,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import StayStrong from './StayStrong';
+import Quotes from './Quotes';
 
 const useStyles = makeStyles(theme => ({
     grow: {
@@ -112,35 +113,20 @@ const MainPage = (props) => {
             <div className={classes.grow}>
                 <AppBar position="static">
                     <Toolbar>
-                        <IconButton
-                            edge="start"
-                            className={classes.menuButton}
-                            color="inherit"
-                            aria-label="open drawer"
-                        >
-                        </IconButton>
                         <p>Quit App</p>
                         <div className={classes.grow} />
                         <div className={classes.sectionDesktop}>
                            
                         </div>
                         <div className={classes.sectionMobile}>
-                            <IconButton
-                                aria-label="show more"
-                                aria-controls={mobileMenuId}
-                                aria-haspopup="true"
-                                onClick={handleMobileMenuOpen}
-                                color="inherit"
-                            >
-                                <MenuIcon />
-                            </IconButton>
+                            
                         </div>
                     </Toolbar>
                 </AppBar>
             </div>
             <div>
                 <StayStrong />
-                <Qoutes />
+                <Quotes />
             </div>
         </div>
     );

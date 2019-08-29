@@ -7,12 +7,20 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { couldStartTrivia } from 'typescript';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
-import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import UndoIcon from '@material-ui/icons/Undo';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
+import Alert from '../components/Alert';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
 
 class StayStrong extends React.Component {
     constructor(props) {
@@ -22,20 +30,25 @@ class StayStrong extends React.Component {
             days: 0,
             time: null,
             intervalId: null,
-            goalName: "Stay Strong!"
+            goalName: "Stay Strong!",
+            isOpen: false
         };
 
         this.countDownDate = null;
         this.updateInterval = null;
-        
+
         this.startTime = this.startTime.bind(this);
         this.resetTime = this.resetTime.bind(this);
         this.stopTime = this.stopTime.bind(this);
 
+        this.handleToggle = this.handleToggle.bind(this);
+
+        this.shouldReset = false;
+
         if (localStorage.getItem('goalName') != "null") {
         }
 
-        if (localStorage.getItem('startDate') != "null") {
+        if (localStorage.getItem('countDate') != "null") {
             this.startTime();
         }
 
@@ -63,14 +76,19 @@ class StayStrong extends React.Component {
         }));
     }
 
+    handleToggle = () => {
+        console.log("state");
+        this.setState({ isOpen: !this.state.isOpen });
+    }
+
     componentDidUpdate(prevProps, prevState) {
 
     }
 
     dayIsPassed(date1, date2) {
         const diffTime = Math.abs(localStorage.getItem('goalName').getTime() - date1.getTime());
-        if(diffTime != null) {
-            const diffDays = Math.ceil(diffTime / (/*1000 * 60 * */ 60 * 24)); 
+        if (diffTime != null) {
+            const diffDays = Math.ceil(diffTime / (/*1000 * 60 * */ 60 * 24));
             return diffDays > 1;
         }
         else {
@@ -78,7 +96,7 @@ class StayStrong extends React.Component {
         }
     }
 
-    startInterval() {
+    startInterval = () => {
         this.intervalId = setInterval(this.updateInterval, 1000);
         if (this.intervalId != null) {
             this.setState({ intervalId: this.intervalId });
@@ -89,13 +107,15 @@ class StayStrong extends React.Component {
         clearInterval(this.intervalId);
     }
 
-    startTime(state) {
-        this.countDownDate = localStorage.getItem('startDate');
+    startTime = () => {
+        this.countDownDate = localStorage.getItem('countDate');
         if (this.countDownDate != "null") {
             this.countDownDate = new Date(this.countDownDate);
+            this.startDate = localStorage.setItem('startDate', this.countDownDate);
         } else {
             this.countDownDate = new Date();
-            localStorage.setItem('startDate', this.countDownDate);
+            localStorage.setItem('countDate', this.countDownDate);
+            this.startDate = localStorage.setItem('startDate', this.countDownDate);
         }
 
         var days = 0;
@@ -103,9 +123,8 @@ class StayStrong extends React.Component {
         var minutes = 0;
         var seconds = 0;
 
-        var state = this;
         // Update the count down every 1 second
-        this.updateTime(state, this.countDownDate, days, hours, minutes, seconds);
+        this.updateTime(this, this.countDownDate, days, hours, minutes, seconds);
         this.startInterval();
     }
 
@@ -133,7 +152,7 @@ class StayStrong extends React.Component {
     resetTime = () => {
         this.stopInterval();
         this.countDownDate = new Date;
-        localStorage.setItem('startDate', this.countDownDate);
+        localStorage.setItem('countDate', this.countDownDate);
         this.setState({ time: null, days: 0 });
         this.updateTime(this, this.countDownDate, 0, 0, 0, 0);
         this.startInterval();
@@ -141,6 +160,7 @@ class StayStrong extends React.Component {
 
     stopTime = () => {
         this.countDownDate = null;
+        localStorage.setItem('countDate', "null");
         localStorage.setItem('startDate', "null");
         this.setState({ time: null, days: 0 });
         this.stopInterval();
@@ -167,7 +187,7 @@ class StayStrong extends React.Component {
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
-                          {this.state.goalName}
+                            {this.state.goalName}
                         </Typography>
                         {this.state.time != null &&
                             <div>
@@ -188,24 +208,26 @@ class StayStrong extends React.Component {
                             variant="filled"
                         />
                         <IconButton onClick={this.resetGoal}>
-                            <UndoIcon/>
+                            <UndoIcon />
                         </IconButton>
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
                     {this.state.time == null &&
-                        <Button size="small" color="primary" onClick={this.startTime}>
-                            Start
+                        <div>
+                            <Button variant="outlined" color="primary" onClick={this.startTime}>
+                                Start
                         </Button>
+                        </div>
                     }
                     {this.state.time != null &&
-                        <Button size="small" color="primary" onClick={this.resetTime}>
-                            Reset
-                        </Button>
+                        <div>
+                            <Alert name={"Reset"} action={this.resetTime} />
+                        </div>
                     }
-                    <Button size="small" color="primary" onClick={this.stopTime}>
-                        Stop
-                    </Button>
+                    <div>
+                        <Alert name={"Stop"} action={this.stopTime} />
+                    </div>
                 </CardActions>
             </Card>
 
