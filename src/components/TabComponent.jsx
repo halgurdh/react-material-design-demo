@@ -68,7 +68,7 @@ export default function TabComponent() {
           aria-label="scrollable auto tabs example"
         >
           <Tab label="Qoute" {...a11yProps(0)} />
-          <Tab label="Timer" {...a11yProps(1)} />
+          <Tab label="Goals" {...a11yProps(1)} />
           <Tab label="Item Three" {...a11yProps(2)} />
           <Tab label="Item Four" {...a11yProps(3)} />
           <Tab label="Item Five" {...a11yProps(4)} />
