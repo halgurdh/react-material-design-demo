@@ -14,8 +14,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import StayStrong from './StayStrong';
-import Quotes from './Quotes';
+import TabComponent from '../components/TabComponent';
 
 const useStyles = makeStyles(theme => ({
     grow: {
@@ -125,8 +124,7 @@ const MainPage = (props) => {
                 </AppBar>
             </div>
             <div>
-                <StayStrong />
-                <Quotes />
+                <TabComponent/>
             </div>
         </div>
     );
